@@ -28,7 +28,7 @@ package com
 			 
 			_world = new World(1600, 1200);
 			var map:Rectangle = new Rectangle(0, 0, _world.worldWidth, _world.worldHeight);
-			_camera = new Camera(640, 480, map);
+			_camera = new Camera(640, 480, map, new Point(300,100));
 			_camera.setSpeed(500).setUpdatableElements(_updatables);
 			
 			_updatables.push(_world);
@@ -40,6 +40,7 @@ package com
 			stage.addEventListener(KeyboardEvent.KEY_UP, KeyManager.me.onKeyUp);	
 			
 			_deltaTime = getTimer();
+			_camera.initialize();
 		}
 		
 		protected function update(event:Event):void

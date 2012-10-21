@@ -14,21 +14,70 @@ package com.camera
 		/** Speed of camera movement in pixels / second (default: 10) */
 		private var _speed:Number = 10;
 		
-		public function Camera(width:int, height:int, stage:Rectangle, position:Point = null)
+		private var _initialized:Boolean = false;
+		
+		/**
+		 * Creates a camera with a viewport of the width and height specified by the so spelled
+		 * parameters that looks at a world with the limits specified by the stage rectangle. If a 
+		 * position is passed the camera will be looking at this position straight away. Camera is
+		 * nothing but a Rectangle that keeps track of the position where the inner objects have to 
+		 * be placed to be properly shown.
+		 * @param width int viewport's width
+		 * @param height int viewport's height
+		 * @param stage Rectangle delimitating the world where the camera is looking to
+		 * @param position Point initial position of the camera
+		 */
+		public function Camera(_width:int, _height:int, stage:Rectangle, position:Point = null)
 		{
 			_stage = stage;
+			
 			if (position == null) {
 				position = new Point();
+			} else {
+				// Validate the position and make sure it's within the limits
+				if (position.x < 0) {
+					position.x = 0;
+				} else if (position.x + _width > stage.width) {
+					position.x = stage.width - _width;
+				}
+				if (position.y < 0) {
+					position.y = 0;
+				} else if (position.x + _width > stage.width) {
+					position.y = stage.height - _height;
+				}
 			}
-			super(position.x, position.y, width, height);			
+			
+			super(position.x, position.y, width, _height);			
 		}
 		
+		/**
+		 * Initializes the camera and makes it look at the initial desired
+		 * position (moves the objects accordingly) 
+		 */
+		public function initialize():void
+		{
+			_initialized = true;
+			moveUpdatables(new Point(this.x, this.y));
+		}
+		
+		/**
+		 * Sets the default movement speed for the camera  
+		 * @param speed in pixels / second
+		 * @return Camera instance for chained calls
+		 */
 		public function setSpeed(speed:Number):Camera
 		{
 			_speed = speed;			
 			return this;
 		}
 		
+		/**
+		 * Sets the updatable elements vector that will be traversed every time
+		 * the camera moves to update the positions of the objects 
+		 * @param updatables Vector of IUpdatable elements
+		 * @return Camera instance for chained calls
+		 * @see IUpdatable
+		 */
 		public function setUpdatableElements(updatables:Vector.<IUpdatable>):Camera
 		{
 			_updatables = updatables;
@@ -72,19 +121,6 @@ package com.camera
 			}
 			
 			doMove(newPos);
-			
-			/*var movement:Point = new Point();
-			if (canMoveX(newPos)) {
-				this.x += newPos.x;
-				movement.x = newPos.x;
-			}
-			
-			if (canMoveY(newPos)) {
-				this.y += newPos.y;
-				movement.y = newPos.y;
-			}
-			
-			moveUpdatables(movement);*/
 			trace("Camera moved to position: " + this.x + ", " + this.y);
 		}
 		
