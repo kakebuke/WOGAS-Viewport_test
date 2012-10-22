@@ -9,6 +9,5 @@ package com
 	public interface IUpdatable
 	{
 		function move(mov:Point):void ;
-		function canMove(mov:Point):Boolean;
 	}
 }

@@ -38,11 +38,6 @@ package com
 			y -= mov.y;
 		}
 		
-		public function canMove(mov:Point):Boolean
-		{
-			return true;
-		}		
-		
 		protected function onLoadError(event:IOErrorEvent):void
 		{
 			trace("AN ERROR HAS OCCURRED: " + IOErrorEvent(event.currentTarget).toString());			

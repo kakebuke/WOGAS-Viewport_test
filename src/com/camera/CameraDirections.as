@@ -2,6 +2,20 @@ package com.camera
 {
 	import com.keyboard.Keys;
 
+	/**
+	 * Static constants and functions to retreive camera directions. Directions 
+	 * can be:
+	 * <ul>
+	 * 	<li>UP</li>
+	 * 	<li>RIGHT</li>
+	 * 	<li>DOWN</li>
+	 * 	<li>LEFT</li>
+	 * 	<li>UP_RIGHT</li>
+	 * 	<li>DOWN_RIGHT</li>
+	 * 	<li>DOWN_LEFT</li>
+	 * 	<li>UP_LEFT</li>
+	 * </ul>
+	 */
 	public class CameraDirections
 	{
 		public static const NONE						:int = -1;

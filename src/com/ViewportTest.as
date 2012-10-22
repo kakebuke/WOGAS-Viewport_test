@@ -1,5 +1,6 @@
 package com
 {
+	import com.actors.SimpleBall;
 	import com.camera.Camera;
 	import com.camera.CameraDirections;
 	import com.keyboard.KeyManager;
@@ -21,6 +22,7 @@ package com
 		private var _updatables:Vector.<IUpdatable>;
 		private var _camera:Camera;
 		private var _world:World;
+		private var _ball:SimpleBall;
 		
 		public function ViewportTest()
 		{
@@ -32,7 +34,17 @@ package com
 			_camera = new Camera(640, 480, map);
 			_camera.setSpeed(500).setUpdatableElements(_updatables);
 			
-			_updatables.push(_world);
+			// adding a moving ball
+			_ball = new SimpleBall()
+				.setColor(0xFF0000)
+				.setRadius(10)
+				.setSpeed(50);
+			_ball.x = 30;
+			_ball.y = 30;
+			
+			addChild(_ball);
+			
+			_updatables.push(_world, _ball);
 			_initUpdatables();
 			
 			addEventListener(Event.ENTER_FRAME, update);
@@ -52,6 +64,9 @@ package com
 				var direction:int = CameraDirections.getDirectionByKeys(KeyManager.me.keysPressed);
 				_camera.move(delta, direction);
 			}
+			
+			_ball.updatePosition(delta);
+			
 		}
 		
 		/**

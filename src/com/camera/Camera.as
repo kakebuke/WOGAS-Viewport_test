@@ -84,6 +84,14 @@ package com.camera
 			return this;
 		}
 		
+		/**
+		 * Moves the camera towards one direction checking that the movement is 
+		 * within the limits
+		 * @param delta seconds elapsed since last update
+		 * @param direction of the movement. 
+		 * @see CameraDirections
+		 * 
+		 */
 		public function move(delta:Number, direction:int):void
 		{
 			var despl:Number = Math.max(delta * _speed, 1);
