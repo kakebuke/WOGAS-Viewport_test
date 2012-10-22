@@ -21,10 +21,20 @@ package com.camera
 		
 		public static function getDirectionByKeys(keysPressed:Vector.<uint>):int
 		{
-			var key1:uint = keysPressed[keysPressed.length - 1];
-			var key2:uint = keysPressed[keysPressed.length - 2];
+			var keyPressed:int;
 			
-			return _getDirectionValue(key1) + _getDirectionValue(key2);
+			if (keysPressed.length > 1) {
+				var key1:uint = keysPressed[keysPressed.length - 1];
+				var key2:uint = keysPressed[keysPressed.length - 2];
+				
+				keyPressed = _getDirectionValue(key1) + _getDirectionValue(key2);
+			} else if (keysPressed.length == 1) {
+				keyPressed = _getDirectionValue(keysPressed[0]);
+			} else {
+				keyPressed = Keys.NONE;
+			}
+			
+			return keyPressed;
 		}
 		
 		private static function _getDirectionValue(key:uint):int

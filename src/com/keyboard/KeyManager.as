@@ -2,8 +2,6 @@ package com.keyboard
 {
 	import flash.events.KeyboardEvent;
 	
-	import mx.core.Singleton;
-
 	public class KeyManager
 	{
 		private static var _instance:KeyManager;

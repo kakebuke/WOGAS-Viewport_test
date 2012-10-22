@@ -47,7 +47,7 @@ package com.camera
 				}
 			}
 			
-			super(position.x, position.y, width, _height);			
+			super(position.x, position.y, _width, _height);			
 		}
 		
 		/**

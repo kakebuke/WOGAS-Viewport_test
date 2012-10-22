@@ -28,7 +28,8 @@ package com
 			 
 			_world = new World(1600, 1200);
 			var map:Rectangle = new Rectangle(0, 0, _world.worldWidth, _world.worldHeight);
-			_camera = new Camera(640, 480, map, new Point(300,100));
+			
+			_camera = new Camera(640, 480, map);
 			_camera.setSpeed(500).setUpdatableElements(_updatables);
 			
 			_updatables.push(_world);
@@ -48,25 +49,8 @@ package com
 			var delta:Number = getDeltaTime();
 			
 			if (KeyManager.me.isKeyPressed) {
-				if (KeyManager.me.keysPressed.length == 1) {
-					switch (KeyManager.me.keysPressed[0]) {
-						case Keys.DOWN:
-							_camera.move(delta, CameraDirections.DOWN);
-							break;
-						case Keys.UP:
-							_camera.move(delta, CameraDirections.UP);
-							break;
-						case Keys.LEFT:
-							_camera.move(delta, CameraDirections.LEFT);
-							break;
-						case Keys.RIGHT:
-							_camera.move(delta, CameraDirections.RIGHT);
-							break;
-					}
-				} else {
-					var direction:int = CameraDirections.getDirectionByKeys(KeyManager.me.keysPressed);
-					_camera.move(delta, direction);
-				}			
+				var direction:int = CameraDirections.getDirectionByKeys(KeyManager.me.keysPressed);
+				_camera.move(delta, direction);
 			}
 		}
 		
